@@ -79,9 +79,10 @@ def get_lux_api():
 
         # Create response
         answer['status'] = 'OK'
-        answer['lux'] = lux
+        answer['lux'] = lux.__str__()
 
         response = jsonify(answer)
+        time.sleep(random.randint(0, 2))
 
         return response
 
