@@ -3,13 +3,13 @@ import os
 import time
 import random
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, g
 
 import definitions
 import get_env
 
 app = Flask(__name__)
-
+version = get_env.get_version()
 
 # fixme : this does not give info about the actual exception
 @app.errorhandler(500)
@@ -45,24 +45,10 @@ def status():
     answer = {}
 
     answer['status'] = 'OK'
+    answer['version'] = version
     answer['time'] = time.ctime()
     response = jsonify(answer)
     return response
-
-# @app.route('/stats')
-# def stats():
-#     answer = {}
-#     app_name = request.args.get('app_name')
-#     uuid = request.args.get('uuid')
-#
-#     answer['status'] = 'OK'
-#     answer['uuid'] = uuid.__str__()
-#     # answer['api_calls'] = -1    # not yet implemented
-#
-#     print('status() : uuid=' + uuid + ', app_name=' + app_name.__str__() + ', api_calls=' + answer['api_calls'])
-#     response = jsonify(answer)
-#
-#     return response
 
 
 @app.route('/get_lux')
