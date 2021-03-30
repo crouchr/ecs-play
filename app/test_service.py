@@ -75,7 +75,7 @@ def get_lux_api():
     try:
         answer = {}
 
-        lux = 100 * random.randint(1, 100)
+        lux = random.randint(1, 100)
 
         # Create response
         answer['status'] = 'OK'
